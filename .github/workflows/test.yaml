@@ -121,10 +121,11 @@ jobs:
         DOCKER_BUILDKIT: 1
       uses: docker/build-push-action@v2
       with:
-        context: ./ 
-        file: ./tools/webcam/Dockerfile
+        context: . 
+        file: tools/webcam/Dockerfile
+        load: true
         builder: ${{ steps.buildx.outputs.name }}
-        tags: $DOCKER_REGISTRY/$IMAGE_NAME:latest
+        tags: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
         build-args:
